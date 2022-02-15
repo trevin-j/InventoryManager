@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">InventoryManager</string>
+    <string name="button_create_item">Create</string>
+    <string name="button_manage_stock">Manage Inventory</string>
+</resources>
