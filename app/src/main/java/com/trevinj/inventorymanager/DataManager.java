@@ -34,6 +34,23 @@ public class DataManager {
         return inventory;
     }
 
+    public static InventoryItem getItemWithID(String id, Context context) {
+        ArrayList<InventoryItem> inventory = getStoredInventory(context);
+
+        for (InventoryItem item:
+             inventory) {
+            if(item.id.equals(id)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Update the stored inventory with a new inventory.
+     * @param context Activity context.
+     * @param inventory ArrayList of the inventory.
+     */
     public static void updateStoredInventory(Context context, ArrayList<InventoryItem> inventory) {
         try {
             FileOutputStream fileOut = context.openFileOutput("inventory.dat", Context.MODE_PRIVATE);
@@ -45,6 +62,16 @@ public class DataManager {
         }
     }
 
+    /**
+     * Retrieve a stored object from the file.
+     * If the file does not exist, it will be created and an empty object is returned.
+     *  If that happens, IOException or ClassNotFoundException may be thrown.
+     * @param context Activity context.
+     * @param fileName Name of file.
+     * @return Object stored in file.
+     * @throws IOException May be thrown if file has no contents.
+     * @throws ClassNotFoundException May be thrown if file has no contents.
+     */
     public static Object getStoredObject(Context context, String fileName) throws IOException, ClassNotFoundException {
         try {
             FileInputStream fileIn = context.openFileInput(fileName);
@@ -59,5 +86,36 @@ public class DataManager {
             inventoryFile.createNewFile();
             return new Object();
         }
+    }
+
+
+    public static void updateItem(Context context, InventoryItem item) {
+        ArrayList<InventoryItem> items = getStoredInventory(context);
+
+        for (InventoryItem storedItem:
+             items) {
+            if (item.id.equals(storedItem.id)) {
+                storedItem.stock = item.stock;
+                storedItem.name = item.name;
+                storedItem.description = item.description;
+                break;
+            }
+        }
+
+        updateStoredInventory(context, items);
+    }
+
+    public static void deleteItem(Context context, InventoryItem item) {
+        ArrayList<InventoryItem> items = getStoredInventory(context);
+
+        for (InventoryItem storedItem:
+                items) {
+            if (item.id.equals(storedItem.id)) {
+                items.remove(storedItem);
+                break;
+            }
+        }
+
+        updateStoredInventory(context, items);
     }
 }

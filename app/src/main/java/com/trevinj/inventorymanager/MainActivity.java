@@ -23,4 +23,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewItemActivity.class);
         startActivity(intent);
     }
+
+    public void startManageActivity(View view) {
+        Intent intent = new Intent(this, ManageInventoryActivity.class);
+        startActivity(intent);
+    }
 }
