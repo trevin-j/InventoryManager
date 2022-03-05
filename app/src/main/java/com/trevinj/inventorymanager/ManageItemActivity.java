@@ -31,10 +31,12 @@ public class ManageItemActivity extends AppCompatActivity {
         TextView itemNameView = findViewById(R.id.itemName);
         TextView itemIDView = findViewById(R.id.itemID);
         TextView itemStockView = findViewById(R.id.stockNumber);
+        TextView itemDescView = findViewById(R.id.itemDesc);
 
         itemNameView.setText(item.name);
         itemIDView.setText(item.id);
         itemStockView.setText(String.valueOf(item.stock));
+        itemDescView.setText(item.description);
     }
 
     public void deleteItem(View view) {

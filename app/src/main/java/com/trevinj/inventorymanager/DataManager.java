@@ -106,7 +106,7 @@ public class DataManager {
     }
 
     public static void deleteItem(Context context, InventoryItem item) {
-        ArrayList<InventoryItem> items = getStoredInventory(context); 
+        ArrayList<InventoryItem> items = getStoredInventory(context);
 
         for (InventoryItem storedItem:
                 items) {
